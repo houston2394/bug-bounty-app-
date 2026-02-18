@@ -536,7 +536,8 @@
                         showLogin();
                     }
                 } else {
-                    showLogin(true);
+                    // Auth disabled — skip login, go straight to app
+                    bypassLogin();
                 }
             } catch (e) {
                 console.error('Auth check failed', e);
