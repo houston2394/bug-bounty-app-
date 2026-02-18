@@ -1,0 +1,15 @@
+[Unit]
+Description=Bug Bounty Application
+After=network.target
+
+[Service]
+Type=simple
+User=houston
+WorkingDirectory=/home/houston/bug-bounty-app
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node backend/server.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

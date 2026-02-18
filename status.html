@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Bounty System - Loading...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            background-color: #0a0a0a;
+            color: #00ff41;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .loader {
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid #333;
+            border-top: 4px solid #00ff41;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .terminal-text {
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .cursor {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%,50% { opacity: 1; }
+            51%,100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <h1>🚀 Bug Bounty System</h1>
+        <div class="terminal-text">
+            Starting application...<span class="cursor">_</span><br>
+            Initializing security tools...<br>
+            Loading target database...<br>
+            <span style="color: #ff9800;">Connecting to servers...</span>
+        </div>
+    </div>
+    
+    <script>
+        // Redirect to actual app once ready
+        setTimeout(function() {
+            window.location.href = 'http://localhost:3000';
+        }, 3000);
+        
+        // Try to connect to both ports
+        Promise.all([
+            fetch('http://localhost:5000/api/health'),
+            fetch('http://localhost:3000')
+        ]).then(function() {
+            document.querySelector('.terminal-text').innerHTML = 
+                '<span style="color: #00ff41;">✅ All systems ready!</span><br>' +
+                'Redirecting to application...<span class="cursor">_</span>';
+        }).catch(function() {
+            document.querySelector('.terminal-text').innerHTML = 
+                '<span style="color: #f44336;">❌ Service not ready</span><br>' +
+                'Please wait or restart services.<br>' +
+                '<span class="cursor">_</span>';
+        });
+    </script>
+</body>
+</html>
