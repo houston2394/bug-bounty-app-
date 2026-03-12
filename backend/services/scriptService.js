@@ -19,6 +19,13 @@ class ScriptService {
     return new Promise((resolve, reject) => {
       const scriptPath = path.join(this.scriptDir, scriptName);
       const outputPath = path.join(this.outputDir, `${jobId}.log`);
+
+      // Validate target domain format to prevent command injection
+      const domainPattern = /^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)*$/;
+      if (!domainPattern.test(target)) {
+        reject(new Error('Invalid domain format'));
+        return;
+      }
       
       if (!fs.existsSync(scriptPath)) {
         reject(new Error(`Script not found: ${scriptName}`));

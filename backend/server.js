@@ -59,6 +59,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Session setup
+if (!process.env.COOKIE_KEY) {
+  console.warn('⚠️  WARNING: COOKIE_KEY env var is not set. Using insecure default secret. Set COOKIE_KEY in production!');
+}
 app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
   keys: [process.env.COOKIE_KEY || 'bug-bounty-secret-key']
