@@ -23,10 +23,13 @@ COPY . .
 # Create data directory
 RUN mkdir -p data
 
-# Install bug bounty tools
-RUN cd bug-bounty-system/tools && \
-    chmod +x install-tools.sh && \
-    ./install-tools.sh
+# Install bug bounty tools (optional – only present in full deployments)
+RUN TOOLS_SCRIPT=bug-bounty-system/tools/install-tools.sh; \
+    if [ -f "$TOOLS_SCRIPT" ]; then \
+      chmod +x "$TOOLS_SCRIPT" && "$TOOLS_SCRIPT"; \
+    else \
+      echo "⚠️  bug-bounty-system/tools not found – skipping tool installation"; \
+    fi
 
 # Expose port
 EXPOSE 5000

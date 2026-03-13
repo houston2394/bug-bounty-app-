@@ -2,6 +2,10 @@ FROM node:18-alpine as build
 
 WORKDIR /app
 
+# Build-time configuration (passed via docker-compose build args)
+ARG REACT_APP_API_URL=/api
+ARG REACT_APP_SOCKET_URL
+
 # Copy package files
 COPY package*.json ./
 
@@ -11,8 +15,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build application
-RUN npm run build
+# Build application (disable source maps in production)
+RUN GENERATE_SOURCEMAP=false \
+    REACT_APP_API_URL=$REACT_APP_API_URL \
+    REACT_APP_SOCKET_URL=$REACT_APP_SOCKET_URL \
+    npm run build
 
 # Production stage
 FROM nginx:alpine
