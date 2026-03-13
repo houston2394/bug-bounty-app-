@@ -51,10 +51,10 @@ router.get('/google',
 );
 
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:8000/#/login?error=true' }),
+  passport.authenticate('google', { failureRedirect: `${process.env.FRONTEND_URL || 'http://localhost:8000'}/#/login?error=true` }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:8000/#/dashboard');
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:8000'}/#/dashboard`);
   }
 );
 
@@ -62,10 +62,10 @@ router.get('/current_user', (req, res) => {
   res.send(req.user || null);
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) { return next(err); }
-    res.redirect('http://localhost:8000');
+    res.redirect(process.env.FRONTEND_URL || 'http://localhost:8000');
   });
 });
 
