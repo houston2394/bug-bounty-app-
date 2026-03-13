@@ -55,23 +55,27 @@ if [ ! -f "data/bugbounty.db" ]; then
     # Database will be auto-created on first run
 fi
 
-# Install bug bounty tools
+# Install bug bounty tools (optional – only if bundled)
 echo "🔧 Installing bug bounty tools..."
-cd bug-bounty-system/tools
-if [ ! -f "/usr/local/bin/subfinder" ]; then
-    chmod +x install-tools.sh
-    ./install-tools.sh
+if [ -f "bug-bounty-system/tools/install-tools.sh" ]; then
+    if [ ! -f "/usr/local/bin/subfinder" ]; then
+        chmod +x bug-bounty-system/tools/install-tools.sh
+        bug-bounty-system/tools/install-tools.sh
+    fi
+else
+    echo "⚠️  bug-bounty-system/tools not found – skipping tool installation"
 fi
-cd ../../../
 
 # Create production environment file
 echo "📝 Creating production environment..."
+COOKIE_KEY=$(openssl rand -hex 32)
 cat > .env << EOF
 NODE_ENV=production
 PORT=5000
 FRONTEND_URL=http://localhost
-SOCKET_URL=http://localhost:5000
+COOKIE_KEY=$COOKIE_KEY
 EOF
+echo "🔑 Generated secure COOKIE_KEY"
 
 # Build frontend
 echo "🏗️ Building frontend for production..."

@@ -39,3 +39,6 @@ coverage/
 # Temp
 tmp/
 temp/
+
+# Stray test artifacts
+test-target.com

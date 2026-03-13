@@ -60,6 +60,10 @@ app.use(cookieParser());
 
 // Session setup
 if (!process.env.COOKIE_KEY) {
+  if (process.env.NODE_ENV === 'production') {
+    console.error('❌ FATAL: COOKIE_KEY env var must be set in production. Exiting.');
+    process.exit(1);
+  }
   console.warn('⚠️  WARNING: COOKIE_KEY env var is not set. Using insecure default secret. Set COOKIE_KEY in production!');
 }
 app.use(cookieSession({
