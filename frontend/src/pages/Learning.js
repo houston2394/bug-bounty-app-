@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Container, Typography, Box, Grid, Card, CardContent, 
   Accordion, AccordionSummary, AccordionDetails,
-  Button, Chip, List, ListItem, ListItemText
+  List, ListItem, ListItemText
 } from '@mui/material';
 import { 
   ExpandMore as ExpandMoreIcon,

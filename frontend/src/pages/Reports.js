@@ -9,7 +9,6 @@ import {
   Add as AddIcon,
   Download as DownloadIcon,
   Visibility as VisibilityIcon,
-  Edit as EditIcon,
   Delete as DeleteIcon
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
