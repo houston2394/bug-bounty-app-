@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Box, Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton } from '@mui/material';
-import { Dashboard as DashboardIcon, Target, Security, BugReport, Description, School, Terminal } from '@mui/icons-material';
+import { Dashboard as DashboardIcon, GpsFixed as Target, Security, Description, School, Terminal } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;

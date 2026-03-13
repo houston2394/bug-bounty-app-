@@ -27,7 +27,6 @@ const TargetDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
-  const [socket, setSocket] = useState(null);
   const [currentScan, setCurrentScan] = useState(null);
   const [scanOutput, setScanOutput] = useState('');
 
@@ -65,7 +64,6 @@ const TargetDetail = () => {
 
   useEffect(() => {
     const newSocket = connectSocket();
-    setSocket(newSocket);
 
     newSocket.emit('join-target', id);
 
@@ -292,7 +290,7 @@ const TargetDetail = () => {
       <TabPanel value={tabValue} index={1}>
         <Card sx={{ bgcolor: '#1a1a1a', border: '1px solid #333' }}>
           <CardContent>
-            <Box display="flex" alignItems-center" mb={2}>
+            <Box display="flex" alignItems="center" mb={2}>
               <BugReportIcon sx={{ color: '#f44336', mr: 1 }} />
               <Typography variant="h6">Vulnerabilities Found</Typography>
             </Box>

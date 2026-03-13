@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { 
   TrendingUp as TrendingUpIcon,
   Security as SecurityIcon,
-  Target as TargetIcon,
+  GpsFixed as TargetIcon,
   BugReport as BugReportIcon 
 } from '@mui/icons-material';
 import { targetsApi } from '../services/api';
@@ -44,7 +44,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend }) => (
 );
 
 const Dashboard = () => {
-  const { data: targets, isLoading: targetsLoading } = useQuery('targets', targetsApi.getAll);
+  const { isLoading: targetsLoading } = useQuery('targets', targetsApi.getAll);
   const { data: stats, isLoading: statsLoading } = useQuery('dashboard-stats', async () => {
     // This would be a real API call to get dashboard stats
     return {

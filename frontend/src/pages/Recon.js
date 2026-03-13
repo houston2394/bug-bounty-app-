@@ -6,7 +6,6 @@ import {
 } from '@mui/material';
 import { 
   PlayArrow as PlayIcon,
-  Stop as StopIcon,
   Refresh as RefreshIcon,
   Terminal as TerminalIcon,
   CheckCircle as CheckIcon,
@@ -19,8 +18,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Recon = () => {
   const navigate = useNavigate();
-  const [selectedTarget, setSelectedTarget] = useState(null);
-  const [socket, setSocket] = useState(null);
   const [currentJobs, setCurrentJobs] = useState({});
   const [jobOutputs, setJobOutputs] = useState({});
   const [showOutput, setShowOutput] = useState(false);
@@ -33,7 +30,6 @@ const Recon = () => {
 
   useEffect(() => {
     const newSocket = connectSocket();
-    setSocket(newSocket);
 
     newSocket.on('job-status-update', (data) => {
       setCurrentJobs(prev => ({
@@ -364,7 +360,7 @@ const Recon = () => {
               border: '1px solid #333'
             }}
           >
-            {selectedJob && jobOutputs[selectedJob.id] || 'No output available for this job.'}
+            {(selectedJob && jobOutputs[selectedJob.id]) || 'No output available for this job.'}
           </Box>
         </DialogContent>
       </Dialog>

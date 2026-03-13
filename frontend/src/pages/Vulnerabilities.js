@@ -8,8 +8,7 @@ import {
 import { 
   Add as AddIcon,
   Edit as EditIcon,
-  Delete as DeleteIcon,
-  Search as SearchIcon
+  Delete as DeleteIcon
 } from '@mui/icons-material';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { vulnApi } from '../services/api';
